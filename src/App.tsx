@@ -12,8 +12,10 @@ import {
   type DeckState,
 } from './lib/deck'
 import FactCard from './components/FactCard'
+import ShareCard from './components/ShareCard'
 import StampColumn from './components/StampColumn'
 import TagFilter, { type TagFilterHandle } from './components/TagFilter'
+import { deepLinkFor, exportCardImage } from './lib/share'
 
 const facts = factsData as Fact[]
 const factsById = new Map(facts.map((f) => [f.id, f]))
@@ -72,7 +74,9 @@ export default function App() {
 
   const [justReshuffled, setJustReshuffled] = useState(false)
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied'>('idle')
+  const [toast, setToast] = useState<string | null>(null)
   const tagFilterRef = useRef<TagFilterHandle>(null)
+  const shareCardRef = useRef<HTMLDivElement>(null)
 
   const currentId = deck.order[deck.index]
   const currentFact = currentId ? factsById.get(currentId) : undefined
@@ -119,6 +123,37 @@ export default function App() {
       setTimeout(() => setCopyStatus('idle'), 1500)
     })
   }, [currentFact])
+
+  const showToast = useCallback((message: string) => {
+    setToast(message)
+    setTimeout(() => setToast(null), 2500)
+  }, [])
+
+  const shareFact = useCallback(async () => {
+    if (!currentFact || !shareCardRef.current) return
+    try {
+      const blob = await exportCardImage(shareCardRef.current)
+      const file = new File([blob], `funfact-${currentFact.id}.png`, { type: 'image/png' })
+      const link = deepLinkFor(currentFact.id)
+
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], text: currentFact.fact, url: link })
+        return
+      }
+
+      const objectUrl = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = objectUrl
+      a.download = file.name
+      a.click()
+      URL.revokeObjectURL(objectUrl)
+      await navigator.clipboard.writeText(link)
+      showToast('Image downloaded and link copied')
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') return
+      showToast('Could not share the image')
+    }
+  }, [currentFact, showToast])
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -180,6 +215,17 @@ export default function App() {
 
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-drawer px-4 py-10">
+      <ShareCard ref={shareCardRef} fact={currentFact} />
+
+      {toast && (
+        <div
+          role="status"
+          className="font-type fixed bottom-6 left-1/2 -translate-x-1/2 rounded-sm bg-ink px-4 py-2 text-xs tracking-widest text-manila uppercase shadow-lg"
+        >
+          {toast}
+        </div>
+      )}
+
       <header className="flex w-full max-w-2xl flex-col gap-3">
         <h1 className="font-serif text-2xl text-manila">Fun facts</h1>
         <TagFilter ref={tagFilterRef} selected={selectedTags} counts={tagCounts} onToggle={toggleTag} />
@@ -209,9 +255,22 @@ export default function App() {
           Back
         </button>
 
-        <button type="button" onClick={copyFact} className="font-type text-xs tracking-widest text-manila-dark uppercase underline">
-          {copyStatus === 'copied' ? 'Copied' : 'Copy fact'}
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={copyFact}
+            className="font-type text-xs tracking-widest text-manila-dark uppercase underline"
+          >
+            {copyStatus === 'copied' ? 'Copied' : 'Copy fact'}
+          </button>
+          <button
+            type="button"
+            onClick={shareFact}
+            className="font-type text-xs tracking-widest text-manila-dark uppercase underline"
+          >
+            Share
+          </button>
+        </div>
 
         <div className="flex flex-col items-end gap-1">
           <button
