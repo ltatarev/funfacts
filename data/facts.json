@@ -1,0 +1,112 @@
+[
+  {
+    "id": "f_20260810_0og6qn",
+    "fact": "A day on Venus lasts 243 Earth days, longer than its 225-day year, because the planet rotates so slowly.",
+    "tags": ["space"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Venus",
+      "title": "Venus",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-10T09:12:00Z"
+  },
+  {
+    "id": "f_20260811_o12pyp",
+    "fact": "The Great Fire of London in 1666 destroyed most of the city inside the old walls, yet records show only a handful of confirmed deaths.",
+    "tags": ["history"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Great_Fire_of_London",
+      "title": "Great Fire of London",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-11T14:30:00Z"
+  },
+  {
+    "id": "f_20260812_2x8vek",
+    "fact": "Octopuses have three hearts and blue blood, colored by a copper-based protein called hemocyanin instead of iron-based hemoglobin.",
+    "tags": ["biology"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Octopus",
+      "title": "Octopus",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-13T08:05:00Z"
+  },
+  {
+    "id": "f_20260814_oli5sc",
+    "fact": "The English word \"set\" has more distinct dictionary definitions than any other word, filling roughly 60,000 words of entry in the OED.",
+    "tags": ["language"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/List_of_English_words_with_disputed_usage",
+      "title": "Set (word)",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-15T11:47:00Z"
+  },
+  {
+    "id": "f_20260816_y8w7f6",
+    "fact": "Honey found sealed in ancient Egyptian tombs is still edible thousands of years later, thanks to its low moisture and natural acidity.",
+    "tags": ["food"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Honey",
+      "title": "Honey",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-17T16:20:00Z"
+  },
+  {
+    "id": "f_20260818_4ycdsg",
+    "fact": "In 1947, engineers on Harvard's Mark II computer found a moth trapped in a relay and taped it into the logbook, coining \"debugging\".",
+    "tags": ["technology"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Software_bug",
+      "title": "Software bug",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-19T10:00:00Z"
+  },
+  {
+    "id": "f_20260820_i5rfhv",
+    "fact": "The Baader-Meinhof phenomenon makes a word or idea you just noticed for the first time seem to suddenly appear everywhere afterward.",
+    "tags": ["psychology"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Frequency_illusion",
+      "title": "Frequency illusion",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-21T13:15:00Z"
+  },
+  {
+    "id": "f_20260821_gfve1p",
+    "fact": "Russia spans eleven time zones, more than any other country, stretching from Kaliningrad to the Bering Strait.",
+    "tags": ["geography"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Time_in_Russia",
+      "title": "Time in Russia",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-22T09:40:00Z"
+  },
+  {
+    "id": "f_20260822_wsq2v5",
+    "fact": "Beethoven composed some of his most celebrated works, including his Ninth Symphony, after he had become almost completely deaf.",
+    "tags": ["music"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Ludwig_van_Beethoven",
+      "title": "Ludwig van Beethoven",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-23T18:55:00Z"
+  },
+  {
+    "id": "f_20260823_xnwtw5",
+    "fact": "Alexander Fleming discovered penicillin by accident in 1928 after noticing mold had killed bacteria in a contaminated petri dish.",
+    "tags": ["medicine"],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Alexander_Fleming",
+      "title": "Alexander Fleming",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-24T07:30:00Z"
+  }
+]

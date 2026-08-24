@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "validate:facts": "tsx scripts/validate-facts.ts",
+    "build": "npm run validate:facts && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
