@@ -2,7 +2,9 @@
   {
     "id": "f_20260810_0og6qn",
     "fact": "A day on Venus lasts 243 Earth days, longer than its 225-day year, because the planet rotates so slowly.",
-    "tags": ["space"],
+    "tags": [
+      "space"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/Venus",
       "title": "Venus",
@@ -11,31 +13,11 @@
     "addedAt": "2026-08-10T09:12:00Z"
   },
   {
-    "id": "f_20260811_o12pyp",
-    "fact": "The Great Fire of London in 1666 destroyed most of the city inside the old walls, yet records show only a handful of confirmed deaths.",
-    "tags": ["history"],
-    "source": {
-      "url": "https://en.wikipedia.org/wiki/Great_Fire_of_London",
-      "title": "Great Fire of London",
-      "siteName": "Wikipedia"
-    },
-    "addedAt": "2026-08-11T14:30:00Z"
-  },
-  {
-    "id": "f_20260812_2x8vek",
-    "fact": "Octopuses have three hearts and blue blood, colored by a copper-based protein called hemocyanin instead of iron-based hemoglobin.",
-    "tags": ["biology"],
-    "source": {
-      "url": "https://en.wikipedia.org/wiki/Octopus",
-      "title": "Octopus",
-      "siteName": "Wikipedia"
-    },
-    "addedAt": "2026-08-13T08:05:00Z"
-  },
-  {
     "id": "f_20260814_oli5sc",
     "fact": "The English word \"set\" has more distinct dictionary definitions than any other word, filling roughly 60,000 words of entry in the OED.",
-    "tags": ["language"],
+    "tags": [
+      "language"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/List_of_English_words_with_disputed_usage",
       "title": "Set (word)",
@@ -46,7 +28,9 @@
   {
     "id": "f_20260816_y8w7f6",
     "fact": "Honey found sealed in ancient Egyptian tombs is still edible thousands of years later, thanks to its low moisture and natural acidity.",
-    "tags": ["food"],
+    "tags": [
+      "food"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/Honey",
       "title": "Honey",
@@ -57,7 +41,9 @@
   {
     "id": "f_20260818_4ycdsg",
     "fact": "In 1947, engineers on Harvard's Mark II computer found a moth trapped in a relay and taped it into the logbook, coining \"debugging\".",
-    "tags": ["technology"],
+    "tags": [
+      "technology"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/Software_bug",
       "title": "Software bug",
@@ -68,7 +54,9 @@
   {
     "id": "f_20260820_i5rfhv",
     "fact": "The Baader-Meinhof phenomenon makes a word or idea you just noticed for the first time seem to suddenly appear everywhere afterward.",
-    "tags": ["psychology"],
+    "tags": [
+      "psychology"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/Frequency_illusion",
       "title": "Frequency illusion",
@@ -77,36 +65,341 @@
     "addedAt": "2026-08-21T13:15:00Z"
   },
   {
-    "id": "f_20260821_gfve1p",
-    "fact": "Russia spans eleven time zones, more than any other country, stretching from Kaliningrad to the Bering Strait.",
-    "tags": ["geography"],
-    "source": {
-      "url": "https://en.wikipedia.org/wiki/Time_in_Russia",
-      "title": "Time in Russia",
-      "siteName": "Wikipedia"
-    },
-    "addedAt": "2026-08-22T09:40:00Z"
-  },
-  {
-    "id": "f_20260822_wsq2v5",
-    "fact": "Beethoven composed some of his most celebrated works, including his Ninth Symphony, after he had become almost completely deaf.",
-    "tags": ["music"],
-    "source": {
-      "url": "https://en.wikipedia.org/wiki/Ludwig_van_Beethoven",
-      "title": "Ludwig van Beethoven",
-      "siteName": "Wikipedia"
-    },
-    "addedAt": "2026-08-23T18:55:00Z"
-  },
-  {
     "id": "f_20260823_xnwtw5",
     "fact": "Alexander Fleming discovered penicillin by accident in 1928 after noticing mold had killed bacteria in a contaminated petri dish.",
-    "tags": ["medicine"],
+    "tags": [
+      "medicine"
+    ],
     "source": {
       "url": "https://en.wikipedia.org/wiki/Alexander_Fleming",
       "title": "Alexander Fleming",
       "siteName": "Wikipedia"
     },
     "addedAt": "2026-08-24T07:30:00Z"
+  },
+  {
+    "id": "f_20260824_h3ntq2",
+    "fact": "George Washington died in 1799, 25 years before scientists named the first dinosaur genus, Megalosaurus, in 1824, so he never knew dinosaurs had existed.",
+    "tags": [
+      "history"
+    ],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Megalosaurus",
+      "title": "Megalosaurus",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-24T14:10:00Z"
+  },
+  {
+    "id": "f_20260824_p2vklm",
+    "fact": "In Italy, 17 is unlucky because its Roman numeral XVII is an anagram of VIXI, Latin for \"I have lived\" \u2014 implying \"now I am dead.\" Many buildings skip a 17th floor, and Alitalia planes have no row 17.",
+    "tags": [
+      "history",
+      "language",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://anamericaninrome.com/2020/04/why-17-is-unlucky-in-italy/",
+      "title": "Why 17 is Unlucky in Italy",
+      "siteName": "An American in Rome"
+    },
+    "addedAt": "2026-08-24T15:00:00Z"
+  },
+  {
+    "id": "f_20260824_k9tzwq",
+    "fact": "Finland sets speeding fines by income, not a flat rate. In 2002, a Nokia director paid a 116,000-euro fine for one offense, based on his multimillion-euro yearly income.",
+    "tags": [
+      "oddities",
+      "geography"
+    ],
+    "source": {
+      "url": "https://www.weforum.org/stories/global-cooperation/in-finland-speeding-tickets-are-linked-to-your-income/",
+      "title": "In Finland, speeding tickets are linked to your income",
+      "siteName": "World Economic Forum"
+    },
+    "addedAt": "2026-08-24T15:45:00Z"
+  },
+  {
+    "id": "f_20260824_b3ktqz",
+    "fact": "Lyn Severance, who designed Ben & Jerry's original 1970s logo and lettering, was paid partly in free ice cream because the young company was short on cash.",
+    "tags": [
+      "food",
+      "history"
+    ],
+    "source": {
+      "url": "https://www.amazon.de/-/en/Ben-Jerrys-Inside-Business-Conscience/dp/0517883708",
+      "title": "Ben & Jerry's: The Inside Scoop: How Two Real Guys Built a Business with a Social Conscience and a Sense of Humor",
+      "siteName": "Amazon"
+    },
+    "addedAt": "2026-08-24T16:30:00Z"
+  },
+  {
+    "id": "f_20260824_r7vnxq",
+    "fact": "Only three people in the world can travel without a passport: the Emperor and Empress of Japan and the British monarch, all exempt due to their head-of-state status.",
+    "tags": [
+      "geography",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://en.tempo.co/read/1958059/only-3-people-in-the-world-can-travel-without-passports-who-are-they",
+      "title": "Only 3 People in the World Can Travel Without Passports, Who Are They?",
+      "siteName": "Tempo.co"
+    },
+    "addedAt": "2026-08-24T17:15:00Z"
+  },
+  {
+    "id": "f_20260824_t4svqp",
+    "fact": "Most public hot springs in Japan ban visitors with tattoos. The rule began to keep out Yakuza members, who traditionally wear full-body tattoos.",
+    "tags": [
+      "geography",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://samurai-sauna-magazine.com/en/guides/japan-onsen-tattoo-culture",
+      "title": "Why Tattoos Are Avoided in Japanese Hot Springs",
+      "siteName": "Samurai Sauna Magazine"
+    },
+    "addedAt": "2026-08-24T18:00:00Z"
+  },
+  {
+    "id": "f_20260824_w2mfqz",
+    "fact": "Steamboat Willie, the 1928 cartoon that introduced Mickey Mouse, entered the US public domain on January 1, 2024, after its 95-year copyright term expired.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Steamboat_Willie",
+      "title": "Steamboat Willie",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-24T18:45:00Z"
+  },
+  {
+    "id": "f_20260824_q6xmdv",
+    "fact": "Marie Curie married Pierre Curie in 1895 wearing a plain navy dress instead of a wedding gown, then wore it as her lab coat for years afterward.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://casacarlini.com/blogs/blog/10-things-you-might-not-know-about-marie-curie",
+      "title": "10 Things You Might Not Know About Marie Curie",
+      "siteName": "Casa Carlini"
+    },
+    "addedAt": "2026-08-24T19:30:00Z"
+  },
+  {
+    "id": "f_20260824_j4pwbn",
+    "fact": "A LEGO Master Model Builder's first training task is often to build a ball that does not fall apart, since a sphere is hard to make from rectangular bricks.",
+    "tags": [
+      "oddities",
+      "technology"
+    ],
+    "source": {
+      "url": "https://www.instagram.com/reels/Czyq4fkRncE/",
+      "title": "Instagram Reel",
+      "siteName": "Instagram"
+    },
+    "addedAt": "2026-08-24T20:15:00Z"
+  },
+  {
+    "id": "f_20260824_v8mxnr",
+    "fact": "In 1901, an Icelandic publisher translated Bram Stoker's Dracula as Makt Myrkranna, but secretly rewrote the plot and characters. No one noticed until a researcher compared the texts in 2014, over 100 years later.",
+    "tags": [
+      "history",
+      "language",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Powers_of_Darkness_(Iceland)",
+      "title": "Powers of Darkness (Iceland)",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-24T21:00:00Z"
+  },
+  {
+    "id": "f_20260824_c7lqzn",
+    "fact": "Milk 'use-by' dates may trace to the Capone family: some accounts credit Al Capone, others his brother Ralph, with pushing Chicago dairies to date cartons in the 1930s after a relative got sick from spoiled milk. The claim is unverified.",
+    "tags": [
+      "food",
+      "history"
+    ],
+    "source": {
+      "url": "https://www.snopes.com/fact-check/al-capone-food-expiration-dates/",
+      "title": "Food Expiration Dates Exist Thanks to Al Capone?",
+      "siteName": "Snopes"
+    },
+    "addedAt": "2026-08-24T21:50:00Z"
+  },
+  {
+    "id": "f_20260824_k9wrxa",
+    "fact": "On June 28, 2023, South Korea legally scrapped its traditional age system, where a baby turns 1 at birth and everyone gains a year every January 1. Overnight, most South Koreans became one or two years younger on paper.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://www.aljazeera.com/news/2023/6/28/why-are-south-koreans-one-year-younger-today",
+      "title": "Why are South Koreans suddenly younger? New age system explained",
+      "siteName": "Al Jazeera"
+    },
+    "addedAt": "2026-08-24T22:30:00Z"
+  },
+  {
+    "id": "f_20260824_p3ntq7",
+    "fact": "In South Korea, people authenticate official documents with a carved personal stamp called a dojang instead of a handwritten signature, a practice that dates back to the 2nd century BCE.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://thesoulofseoul.net/korean-dojang-get-a-korean-name-stamp/",
+      "title": "Dojang: The Korean Name Stamp from History and Meaning to Where To Get One",
+      "siteName": "The Soul of Seoul"
+    },
+    "addedAt": "2026-08-24T23:05:00Z"
+  },
+  {
+    "id": "f_20260824_qzrn3s",
+    "fact": "The Microsoft Excel World Championship has aired on ESPN, so competitors have appeared on the same network as elite athletes for building spreadsheet models.",
+    "tags": [
+      "technology",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://excel-esports.com/",
+      "title": "Microsoft Excel World Championship",
+      "siteName": "FMWC"
+    },
+    "addedAt": "2026-08-24T23:40:00Z"
+  },
+  {
+    "id": "f_20260824_lsh0eh",
+    "fact": "IKEA names products instead of using numeric codes because founder Ingvar Kamprad was dyslexic and struggled to remember number sequences. Each category has its own naming source, such as Swedish lakes for bathroom items.",
+    "tags": [
+      "language",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://stickybranding.com/blog/how-ikea-names-its-products-its-a-surprisingly-brilliant-naming-system",
+      "title": "IKEA's Surprisingly Brilliant Product Branding Strategy",
+      "siteName": "Sticky Branding"
+    },
+    "addedAt": "2026-08-24T23:55:00Z"
+  },
+  {
+    "id": "f_20260824_hxlz5t",
+    "fact": "An AI system built to sort pastries at Japanese bakeries was later adapted by a doctor to spot cancer cells on microscope slides, reaching about 99% accuracy.",
+    "tags": [
+      "technology",
+      "medicine",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://www.newyorker.com/tech/annals-of-technology/the-pastry-ai-that-learned-to-fight-cancer",
+      "title": "The Pastry A.I. That Learned to Fight Cancer",
+      "siteName": "The New Yorker"
+    },
+    "addedAt": "2026-08-24T23:58:00Z"
+  },
+  {
+    "id": "f_20260824_dc4amp",
+    "fact": "Amsterdam's canals swallow 12,000 to 15,000 bicycles a year. Divers also pull about 35 cars and 100 people out of the water each year.",
+    "tags": [
+      "geography",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://www.dutchamsterdam.nl/2290-how-many-bicycles-and-cars-end-up-in-amsterdams-canals",
+      "title": "How Many Bicycles and Cars End Up in Amsterdam's Canals?",
+      "siteName": "DutchAmsterdam"
+    },
+    "addedAt": "2026-08-24T23:59:00Z"
+  },
+  {
+    "id": "f_20260825_n5wtpx",
+    "fact": "Cloudflare keeps a wall of 100 lava lamps in its San Francisco office. It films their random motion and feeds the footage into its encryption systems as a source of true randomness.",
+    "tags": [
+      "technology",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/",
+      "title": "How Do Lava Lamps Help with Internet Encryption?",
+      "siteName": "Cloudflare"
+    },
+    "addedAt": "2026-08-25T00:05:00Z"
+  },
+  {
+    "id": "f_20260824_fsn0cb",
+    "fact": "Utrecht built the world's first fish doorbell: an underwater webcam at a canal lock lets anyone online press a button to alert a keeper when fish arrive and need help passing through.",
+    "tags": [
+      "geography",
+      "biology",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://dutchreview.com/news/fish-doorbell-utrecht",
+      "title": "The Dutch just gave the canal fish a 'fish doorbell' (no, we're not kidding)",
+      "siteName": "DutchReview"
+    },
+    "addedAt": "2026-08-24T20:08:31Z"
+  },
+  {
+    "id": "f_20260824_gevjok",
+    "fact": "Starbucks holds over a billion dollars in unspent gift card and app balances at any time. Like a bank, it earns interest on that cash, and money that's never redeemed becomes pure profit.",
+    "tags": [
+      "food",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://medium.com/e-cell-vit/how-starbucks-is-also-a-bank-80e8b65cf1d4",
+      "title": "How Starbucks is also a Bank?",
+      "siteName": "E-Cell VIT"
+    },
+    "addedAt": "2026-08-24T20:18:31Z"
+  },
+  {
+    "id": "f_20260824_fz6h2y",
+    "fact": "Starbucks took its name from Starbuck, the first mate on the whaling ship Pequod in Herman Melville's novel Moby-Dick. Founders chose it to evoke the romance and seafaring tradition of early coffee traders.",
+    "tags": [
+      "history",
+      "food"
+    ],
+    "source": {
+      "url": "https://about.starbucks.com/history/our-name/",
+      "title": "Our Name",
+      "siteName": "About Starbucks"
+    },
+    "addedAt": "2026-08-24T20:19:36Z"
+  },
+  {
+    "id": "f_20260824_b8kqxz",
+    "fact": "Britney Spears' song \"...Baby One More Time\" was originally titled \"Hit Me Baby One More Time.\" Its Swedish songwriter thought \"hit me\" was American slang for \"call me,\" not a request for violence.",
+    "tags": [
+      "music",
+      "language"
+    ],
+    "source": {
+      "url": "https://www.huffpost.com/entry/britney-spears-hit-me-baby-one-more-time_n_563a8b8be4b0411d306f9f59",
+      "title": "We Finally Know What 'Hit Me, Baby, One More Time' Is Supposed To Mean",
+      "siteName": "HuffPost"
+    },
+    "addedAt": "2026-08-24T23:15:00Z"
+  },
+  {
+    "id": "f_20260824_gj4mwc",
+    "fact": "France executed Hamida Djandoubi by guillotine on September 10, 1977, its last such execution, just months after Star Wars premiered. The guillotine was still France's official execution method at the time.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Hamida_Djandoubi",
+      "title": "Hamida Djandoubi",
+      "siteName": "Wikipedia"
+    },
+    "addedAt": "2026-08-24T23:16:00Z"
   }
 ]
