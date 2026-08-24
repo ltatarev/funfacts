@@ -13,20 +13,17 @@ import {
 } from "./lib/deck";
 import FactCard from "./components/FactCard";
 import ShareCard from "./components/ShareCard";
-import StampColumn from "./components/StampColumn";
-import TagFilter, { type TagFilterHandle } from "./components/TagFilter";
+import TagFilter from "./components/TagFilter";
 import MeshBackground from "./components/MeshBackground";
-import { Sparkle, Star } from "./components/Doodles";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckIcon,
   CopyIcon,
+  FilterIcon,
   ShareIcon,
 } from "./components/Icons";
 import { deepLinkFor, exportCardImage } from "./lib/share";
-
-const SHOW_FILTER_ROW = false;
 
 const facts = factsData as Fact[];
 const factsById = new Map(facts.map((f) => [f.id, f]));
@@ -96,7 +93,7 @@ export default function App() {
   const [justReshuffled, setJustReshuffled] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied">("idle");
   const [toast, setToast] = useState<string | null>(null);
-  const tagFilterRef = useRef<TagFilterHandle>(null);
+  const [filterOpen, setFilterOpen] = useState(false);
   const shareCardRef = useRef<HTMLDivElement>(null);
 
   const currentId = deck.order[deck.index];
@@ -211,7 +208,7 @@ export default function App() {
           break;
         case "/":
           e.preventDefault();
-          tagFilterRef.current?.focus();
+          setFilterOpen(true);
           break;
       }
     }
@@ -227,18 +224,23 @@ export default function App() {
     return counts;
   }, []);
 
+  const unavailableCount = useMemo(
+    () => TAGS.filter((tag) => (tagCounts[tag] ?? 0) === 0).length,
+    [tagCounts],
+  );
+
   if (facts.length === 0) {
     return (
       <>
         <MeshBackground />
         <div className="flex min-h-svh items-center justify-center px-4">
-          <div className="animate-card-pop max-w-md rounded-[2rem] border-[3px] border-ink bg-paper p-8 text-center text-ink shadow-[8px_8px_0_0_var(--color-ink)]">
-            <p className="font-display text-xl font-semibold">No facts yet.</p>
+          <div className="animate-card-pop max-w-md rounded-[22px] bg-paper p-8 text-center text-ink shadow-[0_18px_44px_rgba(60,48,90,0.10)]">
+            <p className="font-display text-xl text-ink">No facts yet.</p>
             <p className="font-body mt-3 text-sm text-ink-soft">
               Add the first one by opening an issue on the repository's{" "}
               <a
                 href="../.github/ISSUE_TEMPLATE/new-fact.yml"
-                className="font-bold text-purple underline"
+                className="border-b border-ink-faint/50 pb-[1px] text-ink"
               >
                 new fact form
               </a>
@@ -256,37 +258,52 @@ export default function App() {
 
   return (
     <>
-      <MeshBackground />
+      <MeshBackground tag={currentFact.tags[0]} />
       <div className="flex min-h-svh flex-col items-center justify-center gap-6 px-4 py-10">
         <ShareCard ref={shareCardRef} fact={currentFact} />
 
         {toast && (
           <div
             role="status"
-            className="font-body animate-toast-pop fixed bottom-6 left-1/2 z-20 -translate-x-1/2 rounded-full border-2 border-ink bg-ink px-5 py-2.5 text-sm font-bold text-cream shadow-[4px_4px_0_0_var(--color-pink)]"
+            className="font-body animate-toast-pop fixed bottom-6 left-1/2 z-20 -translate-x-1/2 rounded-full bg-ink px-5 py-2.5 text-sm text-cream shadow-[0_8px_24px_rgba(23,22,29,0.25)]"
           >
             {toast}
           </div>
         )}
 
-        <header className="flex w-full max-w-2xl flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <Star className="animate-spin-slow h-7 w-7 shrink-0 text-pink sm:h-8 sm:w-8" />
-            <Sparkle className="animate-float h-5 w-5 shrink-0 text-yellow sm:h-6 sm:w-6" />
+        <TagFilter
+          open={filterOpen}
+          selected={selectedTags}
+          counts={tagCounts}
+          resultCount={filteredIds.length}
+          unavailableCount={unavailableCount}
+          onToggle={toggleTag}
+          onClose={() => setFilterOpen(false)}
+        />
+
+        <header className="flex w-full max-w-2xl items-baseline justify-between">
+          <span className="font-display text-xl text-ink sm:text-[21px]">
+            Fun facts
+          </span>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => setFilterOpen(true)}
+              aria-label="Filter facts by tag"
+              className="font-body cursor-pointer text-ink-soft transition-colors hover:text-ink"
+            >
+              <FilterIcon className="h-4 w-4" />
+            </button>
+            <span className="font-body text-[11px] tracking-[0.14em] text-ink-soft uppercase">
+              {String(deck.index + 1).padStart(3, "0")} /{" "}
+              {String(deck.order.length).padStart(3, "0")}
+            </span>
           </div>
-          {SHOW_FILTER_ROW && (
-            <TagFilter
-              ref={tagFilterRef}
-              selected={selectedTags}
-              counts={tagCounts}
-              onToggle={toggleTag}
-            />
-          )}
         </header>
 
         {justReshuffled && (
-          <div className="font-body flex w-full max-w-2xl items-center justify-between rounded-full border-2 border-ink/15 bg-paper/80 px-4 py-2 text-xs font-bold text-ink-soft">
-            <span>That's all of them — starting over! ✨</span>
+          <div className="font-body flex w-full max-w-2xl items-center justify-between rounded-full bg-paper/70 px-4 py-2 text-xs text-ink-soft">
+            <span>That's all of them — starting over.</span>
             <button
               type="button"
               onClick={() => setJustReshuffled(false)}
@@ -300,68 +317,56 @@ export default function App() {
 
         <div
           key={currentId}
-          className="animate-card-pop flex w-full max-w-2xl overflow-hidden rounded-[2rem] border-[3px] border-ink bg-paper shadow-[8px_8px_0_0_var(--color-ink)]"
+          className="animate-card-pop w-full max-w-2xl overflow-hidden rounded-[22px] bg-paper shadow-[0_18px_44px_rgba(60,48,90,0.10)]"
         >
-          <StampColumn seenIds={deck.seenIds} currentId={currentId} />
-          <FactCard
-            fact={currentFact}
-            position={deck.index + 1}
-            total={deck.order.length}
-          />
+          <FactCard fact={currentFact} />
         </div>
 
-        <div className="flex w-full max-w-2xl items-center justify-between gap-3">
+        <div className="flex w-full max-w-2xl items-center gap-3">
           <button
             type="button"
             onClick={goBack}
             disabled={deck.index === 0}
-            className="font-body flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-ink px-4 py-2.5 text-sm font-bold text-ink transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0_0_var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+            aria-label="Previous fact"
+            className="flex h-[42px] w-[42px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-ink-faint/60 text-ink-soft transition-all duration-150 hover:border-ink hover:text-ink disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-ink-faint/60 disabled:hover:text-ink-soft"
           >
-            <ArrowLeftIcon className="h-4 w-4" />
-            Back
+            <ArrowLeftIcon className="h-[17px] w-[17px]" />
           </button>
 
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={copyFact}
-              className="font-body flex cursor-pointer items-center gap-1.5 text-sm font-bold text-ink-soft transition-colors hover:text-purple"
-            >
-              {copyStatus === "copied" ? (
-                <CheckIcon className="h-4 w-4 text-mint" />
-              ) : (
-                <CopyIcon className="h-4 w-4" />
-              )}
-              {copyStatus === "copied" ? "Copied!" : "Copy"}
-            </button>
-            <button
-              type="button"
-              onClick={shareFact}
-              className="font-body flex cursor-pointer items-center gap-1.5 text-sm font-bold text-ink-soft transition-colors hover:text-purple"
-            >
-              <ShareIcon className="h-4 w-4" />
-              Share
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={goNext}
+            className="font-body flex cursor-pointer items-center gap-2.5 rounded-full bg-ink px-[22px] py-3 text-[13px] text-cream transition-opacity hover:opacity-90"
+          >
+            Next fact
+            <ArrowRightIcon className="h-4 w-4" />
+          </button>
 
-          <div className="flex flex-col items-end gap-1">
-            <button
-              type="button"
-              onClick={goNext}
-              className="font-display flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-ink px-5 py-2.5 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-ink)] active:translate-y-0 active:shadow-[1px_1px_0_0_var(--color-ink)]"
-              style={{
-                background:
-                  "linear-gradient(90deg, var(--color-pink), var(--color-purple))",
-                color: "white",
-              }}
-            >
-              Next fact
-              <ArrowRightIcon className="h-4 w-4" />
-            </button>
-            <span className="font-body text-[11px] font-semibold text-ink-soft/70">
-              space · → · enter
-            </span>
-          </div>
+          <button
+            type="button"
+            onClick={copyFact}
+            aria-label={copyStatus === "copied" ? "Copied" : "Copy fact"}
+            className="flex h-[42px] w-[42px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-ink-faint/60 text-ink-soft transition-all duration-150 hover:border-ink hover:text-ink"
+          >
+            {copyStatus === "copied" ? (
+              <CheckIcon className="h-[17px] w-[17px] text-teal-text" />
+            ) : (
+              <CopyIcon className="h-[17px] w-[17px]" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={shareFact}
+            aria-label="Share fact"
+            className="flex h-[42px] w-[42px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-ink-faint/60 text-ink-soft transition-all duration-150 hover:border-ink hover:text-ink"
+          >
+            <ShareIcon className="h-[17px] w-[17px]" />
+          </button>
+
+          <span className="font-body ml-auto hidden text-[11px] tracking-[0.1em] text-ink-faint sm:inline">
+            press space
+          </span>
         </div>
       </div>
     </>

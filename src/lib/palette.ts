@@ -1,21 +1,42 @@
-import { hashString } from './hash'
+import { hashString } from "./hash";
 
 export interface TagColor {
-  bg: string
-  text: string
-  border: string
+  bg: string;
+  text: string;
+}
+
+export interface TagGradient {
+  /** Three radial-gradient stop colors, keyed to the tag's mood. */
+  stops: [string, string, string];
 }
 
 const TAG_COLORS: TagColor[] = [
-  { bg: '#ffe1f2', text: '#c2136d', border: '#ff3ea5' },
-  { bg: '#e9e0ff', text: '#5b21b6', border: '#7c3aed' },
-  { bg: '#dcf3ff', text: '#0369a1', border: '#38bdf8' },
-  { bg: '#fff3c4', text: '#8a5a00', border: '#ffd23f' },
-  { bg: '#ffe1d6', text: '#c2410c', border: '#ff6b4a' },
-  { bg: '#d3fbec', text: '#0f7a5c', border: '#2dd4a7' },
-]
+  { bg: "var(--color-violet-bg)", text: "var(--color-violet-text)" },
+  { bg: "var(--color-peach-bg)", text: "var(--color-peach-text)" },
+  { bg: "var(--color-teal-bg)", text: "var(--color-teal-text)" },
+  { bg: "var(--color-rose-bg)", text: "var(--color-rose-text)" },
+  { bg: "var(--color-sky-bg)", text: "var(--color-sky-text)" },
+  { bg: "var(--color-gold-bg)", text: "var(--color-gold-text)" },
+];
+
+const TAG_GRADIENTS: TagGradient[] = [
+  { stops: ["#C9B8F5", "#F2C3DC", "#B9D9F0"] },
+  { stops: ["#F7C9A8", "#F3B9B5", "#E9D6A6"] },
+  { stops: ["#A8D9CC", "#D6C6F2", "#C3E2DC"] },
+  { stops: ["#F2C3DC", "#F7C9A8", "#E9BEEA"] },
+  { stops: ["#B9D9F0", "#C9B8F5", "#A8D9CC"] },
+  { stops: ["#E9D6A6", "#F7C9A8", "#F2C3DC"] },
+];
+
+const DEFAULT_GRADIENT: TagGradient = { stops: ["#D6C6F2", "#C3E2DC", "#F2C3DC"] };
 
 /** Deterministic color per tag so a tag always renders the same hue. */
 export function tagColor(tag: string): TagColor {
-  return TAG_COLORS[hashString(tag) % TAG_COLORS.length]
+  return TAG_COLORS[hashString(tag) % TAG_COLORS.length];
+}
+
+/** Deterministic background gradient per tag, so the page mood matches the fact. */
+export function tagGradient(tag: string | undefined): TagGradient {
+  if (!tag) return DEFAULT_GRADIENT;
+  return TAG_GRADIENTS[hashString(tag) % TAG_GRADIENTS.length];
 }

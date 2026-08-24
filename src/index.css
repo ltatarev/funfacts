@@ -1,96 +1,55 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --color-cream: #fff8ef;
-  --color-cream-soft: #fdeee0;
-  --color-paper: #fffdf9;
-  --color-ink: #241748;
-  --color-ink-soft: #5a4a8a;
-  --color-pink: #ff3ea5;
-  --color-purple: #7c3aed;
-  --color-blue: #38bdf8;
-  --color-yellow: #ffd23f;
-  --color-coral: #ff6b4a;
-  --color-mint: #2dd4a7;
-  --color-lilac: #c4b5fd;
+  --color-cream: #fbfaf7;
+  --color-paper: #ffffff;
+  --color-ink: #17161d;
+  --color-ink-soft: #6b6878;
+  --color-ink-faint: #9a96a6;
+  --color-line: #e4e1da;
 
-  --font-display: 'Fredoka', ui-rounded, system-ui, sans-serif;
-  --font-body: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --color-violet: #c9b8f5;
+  --color-violet-bg: #eeeafb;
+  --color-violet-text: #4a3b7a;
+  --color-peach: #f7c9a8;
+  --color-peach-bg: #fbebdf;
+  --color-peach-text: #8a4a22;
+  --color-teal: #a8d9cc;
+  --color-teal-bg: #dff0ea;
+  --color-teal-text: #1f5a4a;
+  --color-rose: #f2c3dc;
+  --color-rose-bg: #fbe6ee;
+  --color-rose-text: #7a3352;
+  --color-sky: #b9d9f0;
+  --color-sky-bg: #e3eff9;
+  --color-sky-text: #1b4e7a;
+  --color-gold: #e9d6a6;
+  --color-gold-bg: #fbf3dc;
+  --color-gold-text: #8a6a1f;
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "DM Mono", ui-monospace, "SF Mono", monospace;
 }
 
 body {
   background: var(--color-cream);
 }
 
-@keyframes blob-drift-1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(6%, -8%) scale(1.1);
-  }
-  66% {
-    transform: translate(-6%, 4%) scale(0.94);
-  }
-}
-
-@keyframes blob-drift-2 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  40% {
-    transform: translate(-8%, 6%) scale(1.06);
-  }
-  75% {
-    transform: translate(5%, -5%) scale(0.96);
-  }
-}
-
-@keyframes blob-drift-3 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(5%, 9%) scale(1.12);
-  }
-}
-
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0) rotate(var(--rot, 0deg));
-  }
-  50% {
-    transform: translateY(-12px) rotate(var(--rot, 0deg));
-  }
-}
-
 @keyframes card-pop {
   0% {
     opacity: 0;
-    transform: scale(0.93) translateY(16px) rotate(-1.4deg);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.015) translateY(-3px) rotate(0.6deg);
+    transform: scale(0.97) translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0) rotate(0deg);
+    transform: scale(1) translateY(0);
   }
 }
 
 @keyframes pill-pop {
   0% {
     opacity: 0;
-    transform: scale(0.5);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.1);
+    transform: scale(0.85);
   }
   100% {
     opacity: 1;
@@ -101,7 +60,7 @@ body {
 @keyframes toast-pop {
   0% {
     opacity: 0;
-    transform: translate(-50%, 12px) scale(0.9);
+    transform: translate(-50%, 12px) scale(0.95);
   }
   100% {
     opacity: 1;
@@ -109,44 +68,31 @@ body {
   }
 }
 
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
+@keyframes sheet-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
   }
-}
-
-@keyframes wiggle {
-  0%,
   100% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(4deg);
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
 .animate-card-pop {
-  animation: card-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: card-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-pill-pop {
-  animation: pill-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: pill-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-toast-pop {
-  animation: toast-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: toast-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.animate-float {
-  animation: float-y 6s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 14s linear infinite;
-}
-
-.animate-wiggle:hover {
-  animation: wiggle 0.4s ease-in-out;
+.animate-sheet-pop {
+  animation: sheet-pop 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
