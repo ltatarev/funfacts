@@ -19,13 +19,10 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@mozilla/readability": "^0.6.0",
-    "@types/jsdom": "^30.0.0",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
-    "jsdom": "^30.0.1",
     "oxlint": "^1.79.0",
     "tsx": "^4.23.12",
     "typescript": "~6.0.2",
