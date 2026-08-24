@@ -219,20 +219,6 @@
     "addedAt": "2026-08-24T21:00:00Z"
   },
   {
-    "id": "f_20260824_c7lqzn",
-    "fact": "Milk 'use-by' dates may trace to the Capone family: some accounts credit Al Capone, others his brother Ralph, with pushing Chicago dairies to date cartons in the 1930s after a relative got sick from spoiled milk. The claim is unverified.",
-    "tags": [
-      "food",
-      "history"
-    ],
-    "source": {
-      "url": "https://www.snopes.com/fact-check/al-capone-food-expiration-dates/",
-      "title": "Food Expiration Dates Exist Thanks to Al Capone?",
-      "siteName": "Snopes"
-    },
-    "addedAt": "2026-08-24T21:50:00Z"
-  },
-  {
     "id": "f_20260824_k9wrxa",
     "fact": "On June 28, 2023, South Korea legally scrapped its traditional age system, where a baby turns 1 at birth and everyone gains a year every January 1. Overnight, most South Koreans became one or two years younger on paper.",
     "tags": [
@@ -401,5 +387,19 @@
       "siteName": "Wikipedia"
     },
     "addedAt": "2026-08-24T23:16:00Z"
+  },
+  {
+    "id": "f_20260824_r5nkpw",
+    "fact": "Nintendo was founded in Kyoto in 1889 as a playing-card company, the same year the Eiffel Tower opened in Paris and Jack the Ripper's identity was still unknown in London.",
+    "tags": [
+      "history",
+      "oddities"
+    ],
+    "source": {
+      "url": "https://pinandplan.com/what-do-nintendo-and-the-eiffel-tower-have-in-common",
+      "title": "What do Nintendo and the Eiffel Tower Have in Common?",
+      "siteName": "Pin + Plan"
+    },
+    "addedAt": "2026-08-24T21:43:27Z"
   }
 ]
