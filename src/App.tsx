@@ -15,7 +15,18 @@ import FactCard from "./components/FactCard";
 import ShareCard from "./components/ShareCard";
 import StampColumn from "./components/StampColumn";
 import TagFilter, { type TagFilterHandle } from "./components/TagFilter";
+import MeshBackground from "./components/MeshBackground";
+import { Sparkle, Star } from "./components/Doodles";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CheckIcon,
+  CopyIcon,
+  ShareIcon,
+} from "./components/Icons";
 import { deepLinkFor, exportCardImage } from "./lib/share";
+
+const SHOW_FILTER_ROW = false;
 
 const facts = factsData as Fact[];
 const factsById = new Map(facts.map((f) => [f.id, f]));
@@ -218,21 +229,24 @@ export default function App() {
 
   if (facts.length === 0) {
     return (
-      <div className="flex min-h-svh items-center justify-center bg-drawer px-4">
-        <div className="max-w-md rounded-sm bg-manila p-8 text-center text-ink">
-          <p className="font-serif text-xl">No facts yet.</p>
-          <p className="font-type mt-3 text-sm text-graphite">
-            Add the first one by opening an issue on the repository's{" "}
-            <a
-              href="../.github/ISSUE_TEMPLATE/new-fact.yml"
-              className="underline"
-            >
-              new fact form
-            </a>
-            .
-          </p>
+      <>
+        <MeshBackground />
+        <div className="flex min-h-svh items-center justify-center px-4">
+          <div className="animate-card-pop max-w-md rounded-[2rem] border-[3px] border-ink bg-paper p-8 text-center text-ink shadow-[8px_8px_0_0_var(--color-ink)]">
+            <p className="font-display text-xl font-semibold">No facts yet.</p>
+            <p className="font-body mt-3 text-sm text-ink-soft">
+              Add the first one by opening an issue on the repository's{" "}
+              <a
+                href="../.github/ISSUE_TEMPLATE/new-fact.yml"
+                className="font-bold text-purple underline"
+              >
+                new fact form
+              </a>
+              .
+            </p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -241,89 +255,115 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-drawer px-4 py-10">
-      <ShareCard ref={shareCardRef} fact={currentFact} />
+    <>
+      <MeshBackground />
+      <div className="flex min-h-svh flex-col items-center justify-center gap-6 px-4 py-10">
+        <ShareCard ref={shareCardRef} fact={currentFact} />
 
-      {toast && (
+        {toast && (
+          <div
+            role="status"
+            className="font-body animate-toast-pop fixed bottom-6 left-1/2 z-20 -translate-x-1/2 rounded-full border-2 border-ink bg-ink px-5 py-2.5 text-sm font-bold text-cream shadow-[4px_4px_0_0_var(--color-pink)]"
+          >
+            {toast}
+          </div>
+        )}
+
+        <header className="flex w-full max-w-2xl flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <Star className="animate-spin-slow h-7 w-7 shrink-0 text-pink sm:h-8 sm:w-8" />
+            <Sparkle className="animate-float h-5 w-5 shrink-0 text-yellow sm:h-6 sm:w-6" />
+          </div>
+          {SHOW_FILTER_ROW && (
+            <TagFilter
+              ref={tagFilterRef}
+              selected={selectedTags}
+              counts={tagCounts}
+              onToggle={toggleTag}
+            />
+          )}
+        </header>
+
+        {justReshuffled && (
+          <div className="font-body flex w-full max-w-2xl items-center justify-between rounded-full border-2 border-ink/15 bg-paper/80 px-4 py-2 text-xs font-bold text-ink-soft">
+            <span>That's all of them — starting over! ✨</span>
+            <button
+              type="button"
+              onClick={() => setJustReshuffled(false)}
+              aria-label="Dismiss"
+              className="cursor-pointer text-base leading-none"
+            >
+              ×
+            </button>
+          </div>
+        )}
+
         <div
-          role="status"
-          className="font-type fixed bottom-6 left-1/2 -translate-x-1/2 rounded-sm bg-ink px-4 py-2 text-xs tracking-widest text-manila uppercase shadow-lg"
+          key={currentId}
+          className="animate-card-pop flex w-full max-w-2xl overflow-hidden rounded-[2rem] border-[3px] border-ink bg-paper shadow-[8px_8px_0_0_var(--color-ink)]"
         >
-          {toast}
-        </div>
-      )}
-
-      <header className="flex w-full max-w-2xl flex-col gap-3">
-        <TagFilter
-          ref={tagFilterRef}
-          selected={selectedTags}
-          counts={tagCounts}
-          onToggle={toggleTag}
-        />
-      </header>
-
-      {justReshuffled && (
-        <div className="font-type flex w-full max-w-2xl items-center justify-between rounded-sm border border-manila-dark/40 px-3 py-2 text-[11px] tracking-widest text-manila-dark uppercase">
-          <span>That's all of them — starting over.</span>
-          <button
-            type="button"
-            onClick={() => setJustReshuffled(false)}
-            aria-label="Dismiss"
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      <div className="flex w-full max-w-2xl overflow-hidden rounded-sm border border-drawer-line shadow-2xl motion-safe:transition-transform motion-safe:duration-150">
-        <StampColumn seenIds={deck.seenIds} currentId={currentId} />
-        <FactCard
-          fact={currentFact}
-          position={deck.index + 1}
-          total={deck.order.length}
-        />
-      </div>
-
-      <div className="flex w-full max-w-2xl items-center justify-between gap-3">
-        <button
-          type="button"
-          onClick={goBack}
-          disabled={deck.index === 0}
-          className="font-type rounded-sm border border-manila-dark/40 px-3 py-2 text-xs tracking-widest text-manila uppercase disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          Back
-        </button>
-
-        <div className="flex items-center gap-4">
-          <button
-            type="button"
-            onClick={copyFact}
-            className="font-type text-xs tracking-widest text-manila-dark uppercase underline"
-          >
-            {copyStatus === "copied" ? "Copied" : "Copy fact"}
-          </button>
-          <button
-            type="button"
-            onClick={shareFact}
-            className="font-type text-xs tracking-widest text-manila-dark uppercase underline"
-          >
-            Share
-          </button>
+          <StampColumn seenIds={deck.seenIds} currentId={currentId} />
+          <FactCard
+            fact={currentFact}
+            position={deck.index + 1}
+            total={deck.order.length}
+          />
         </div>
 
-        <div className="flex flex-col items-end gap-1">
+        <div className="flex w-full max-w-2xl items-center justify-between gap-3">
           <button
             type="button"
-            onClick={goNext}
-            className="font-type rounded-sm bg-stamp px-4 py-2 text-xs tracking-widest text-manila uppercase"
+            onClick={goBack}
+            disabled={deck.index === 0}
+            className="font-body flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-ink px-4 py-2.5 text-sm font-bold text-ink transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[3px_3px_0_0_var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-none"
           >
-            Next fact
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back
           </button>
-          <span className="font-type text-[10px] tracking-widest text-manila-dark/70 uppercase">
-            space · → · enter
-          </span>
+
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={copyFact}
+              className="font-body flex cursor-pointer items-center gap-1.5 text-sm font-bold text-ink-soft transition-colors hover:text-purple"
+            >
+              {copyStatus === "copied" ? (
+                <CheckIcon className="h-4 w-4 text-mint" />
+              ) : (
+                <CopyIcon className="h-4 w-4" />
+              )}
+              {copyStatus === "copied" ? "Copied!" : "Copy"}
+            </button>
+            <button
+              type="button"
+              onClick={shareFact}
+              className="font-body flex cursor-pointer items-center gap-1.5 text-sm font-bold text-ink-soft transition-colors hover:text-purple"
+            >
+              <ShareIcon className="h-4 w-4" />
+              Share
+            </button>
+          </div>
+
+          <div className="flex flex-col items-end gap-1">
+            <button
+              type="button"
+              onClick={goNext}
+              className="font-display flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-ink px-5 py-2.5 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--color-ink)] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-ink)] active:translate-y-0 active:shadow-[1px_1px_0_0_var(--color-ink)]"
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-pink), var(--color-purple))",
+                color: "white",
+              }}
+            >
+              Next fact
+              <ArrowRightIcon className="h-4 w-4" />
+            </button>
+            <span className="font-body text-[11px] font-semibold text-ink-soft/70">
+              space · → · enter
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
