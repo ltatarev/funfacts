@@ -63,11 +63,11 @@ export function markSeen(state: DeckState, id: string): DeckState {
 }
 
 /**
- * Loads the persisted deck, scoped to `filteredIds` (the current tag filter),
- * with `seenIds` validated against `allIds` since seen state is global and must
- * survive filter changes. Facts added since the last visit (present in
- * `filteredIds` but missing from the saved order) are shuffled in right after
- * the current position so they surface early.
+ * Loads `seenIds` from storage, validated against `allIds` since seen state is
+ * global and must survive filter changes, and builds a freshly shuffled deck
+ * from `filteredIds` around it (unseen ids first). The order is never
+ * restored from storage — each load reshuffles, so the fact order is always
+ * random rather than resuming the previous session's order.
  */
 export function loadDeck(filteredIds: readonly string[], allIds: readonly string[]): DeckState | null {
   try {
@@ -83,22 +83,10 @@ export function loadDeck(filteredIds: readonly string[], allIds: readonly string
       return null
     }
 
-    const filteredSet = new Set(filteredIds)
     const allSet = new Set(allIds)
-    let order = parsed.order.filter((id) => filteredSet.has(id))
     const seenIds = parsed.seenIds.filter((id) => allSet.has(id))
-
-    const present = new Set(order)
-    const missing = filteredIds.filter((id) => !present.has(id))
-    if (missing.length > 0) {
-      const shuffledMissing = shuffle(missing, parsed.seed + 7)
-      const index = Math.min(parsed.index, order.length)
-      order = [...order.slice(0, index), ...shuffledMissing, ...order.slice(index)]
-    }
-
-    if (order.length === 0) return null
-    const index = Math.min(parsed.index, order.length - 1)
-    return { seed: parsed.seed, order, index, seenIds }
+    if (filteredIds.length === 0) return null
+    return rebuildDeck(filteredIds, seenIds)
   } catch {
     return null
   }
