@@ -15,7 +15,7 @@ Turn one piece of input (a link, an article, or raw text) into a new entry in
 
 2. Get the input from the user's `$ARGUMENTS`, or ask for it if empty. If the
    input is a URL, fetch its content with `WebFetch` before applying the
-   rules.
+   rules. If URL doesn't exist try to search on your own before asking the user.
 
 3. Apply the `PROMPT.md` rules to produce:
    - `Article URL`
