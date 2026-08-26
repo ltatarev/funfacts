@@ -29,7 +29,7 @@ body:
       description: >-
         Comma-separated, 1-3, chosen from: space, history, biology, language,
         food, technology, psychology, geography, music, sport, medicine,
-        oddities.
+        oddities, tv, world record.
       placeholder: space, history
     validations:
       required: true

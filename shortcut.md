@@ -56,7 +56,8 @@ for quick access.
 
 Run the Shortcut with a real URL, fact, and a valid tag from the list
 (`space, history, biology, language, food, technology, psychology,
-geography, music, sport, medicine, oddities`). Check the GitHub Actions tab
+geography, music, sport, medicine, oddities, tv, world record`). Check
+the GitHub Actions tab
 in the repo — the `add-fact` workflow runs, commits to `data/facts.json`,
 and redeploys the site.
 
@@ -79,4 +80,4 @@ the `needs-attention` label. There are three ways to run it again:
 
 The `Tags` field must use the tags in `data/tags.json`: space, history,
 biology, language, food, technology, psychology, geography, music, sport,
-medicine, oddities. The workflow rejects any other tag.
+medicine, oddities, tv, world record. The workflow rejects any other tag.

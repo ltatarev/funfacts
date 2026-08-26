@@ -7,7 +7,7 @@ State the fact in plain language. Do not copy the source text word for word.
 Warn me if there is no source confirming this fact.
 
 Choose 1 to 3 tags for the fact. Pick only from this list:
-space, history, biology, language, food, technology, psychology, geography, music, sport, medicine, oddities
+space, history, biology, language, food, technology, psychology, geography, music, sport, medicine, oddities, tv, world record
 
 Output only this, with no extra text:
 
