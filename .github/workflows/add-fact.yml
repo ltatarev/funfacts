@@ -2,7 +2,12 @@ name: Add fact
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled, edited]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Number of the issue to process again.
+        required: true
 
 permissions:
   contents: write
@@ -17,8 +22,11 @@ concurrency:
 jobs:
   add-fact:
     if: >
-      github.event.issue.user.login == github.repository_owner &&
-      contains(github.event.issue.labels.*.name, 'fact')
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.issue.user.login == github.repository_owner &&
+      (github.event.action != 'labeled' || github.event.label.name == 'fact') &&
+      (contains(github.event.issue.labels.*.name, 'fact') ||
+      contains(github.event.issue.body, '### Article URL')))
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
@@ -29,11 +37,22 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Resolve issue
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ inputs.issue_number || github.event.issue.number }}
+        run: |
+          author=$(gh api "repos/${{ github.repository }}/issues/$NUMBER" --jq .user.login)
+          if [ "$author" != "${{ github.repository_owner }}" ]; then
+            echo "issue #$NUMBER is not from ${{ github.repository_owner }}"
+            exit 1
+          fi
+          echo "number=$NUMBER" >> "$GITHUB_OUTPUT"
       - run: npx tsx scripts/add-fact.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
       - name: Commit fact
         id: commit
         run: |
@@ -44,7 +63,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/facts.json
-          git commit -m "Add fact from issue #${{ github.event.issue.number }}"
+          git commit -m "Add fact from issue #${{ steps.issue.outputs.number }}"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 

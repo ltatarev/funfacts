@@ -5,7 +5,6 @@ import { factSchema, factsFileSchema, TAGS } from '../src/lib/schema.ts'
 const token = requireEnv('GITHUB_TOKEN')
 const repo = requireEnv('GITHUB_REPOSITORY')
 const issueNumber = Number(requireEnv('ISSUE_NUMBER'))
-const issueBody = process.env.ISSUE_BODY ?? ''
 
 const API = 'https://api.github.com'
 const factsPath = fileURLToPath(new URL('../data/facts.json', import.meta.url))
@@ -48,12 +47,38 @@ async function closeIssue(): Promise<void> {
   })
 }
 
+async function readIssueBody(): Promise<string> {
+  const res = await gh(`/repos/${repo}/issues/${issueNumber}`)
+  const issue = (await res.json()) as { body: string | null }
+  return issue.body ?? ''
+}
+
 async function labelNeedsAttention(): Promise<void> {
   await gh(`/repos/${repo}/issues/${issueNumber}/labels`, {
     method: 'POST',
     body: JSON.stringify({ labels: ['needs-attention'] }),
   })
 }
+
+// The workflow runs again on every edit, so clear the old failure label first.
+async function clearNeedsAttention(): Promise<void> {
+  const res = await fetch(
+    `${API}/repos/${repo}/issues/${issueNumber}/labels/needs-attention`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    },
+  )
+  if (!res.ok && res.status !== 404) {
+    console.error(`failed to remove needs-attention: ${res.status}`)
+  }
+}
+
+const RETRY_HINT = 'Edit this issue to correct it. The workflow runs again on each edit.'
 
 // --- parse the issue-form body ---
 // GitHub issue forms render each field as "### <label>\n\n<value or _No response_>".
@@ -145,7 +170,8 @@ function makeId(): string {
 }
 
 async function main(): Promise<void> {
-  const fields = parseIssue(issueBody)
+  await clearNeedsAttention()
+  const fields = parseIssue(await readIssueBody())
 
   if (!fields.url || !fields.fact || !fields.tags || fields.tags.length === 0) {
     const missing = [
@@ -153,7 +179,7 @@ async function main(): Promise<void> {
       !fields.fact && 'Fact',
       (!fields.tags || fields.tags.length === 0) && 'Tags',
     ].filter(Boolean)
-    await commentOnIssue(`Missing required field(s): ${missing.join(', ')}.`)
+    await commentOnIssue(`Missing required field(s): ${missing.join(', ')}.\n\n${RETRY_HINT}`)
     await labelNeedsAttention()
     return
   }
@@ -161,7 +187,7 @@ async function main(): Promise<void> {
   const unknownTags = fields.tags.filter((t) => !TAGS.includes(t))
   if (unknownTags.length > 0) {
     await commentOnIssue(
-      `Unknown tag(s): ${unknownTags.join(', ')}. Choose from: ${TAGS.join(', ')}.`,
+      `Unknown tag(s): ${unknownTags.join(', ')}. Choose from: ${TAGS.join(', ')}.\n\n${RETRY_HINT}`,
     )
     await labelNeedsAttention()
     return
@@ -202,7 +228,9 @@ async function main(): Promise<void> {
 main().catch(async (err: unknown) => {
   console.error(err)
   try {
-    await commentOnIssue(`Failed to add fact: ${err instanceof Error ? err.message : String(err)}`)
+    await commentOnIssue(
+      `Failed to add fact: ${err instanceof Error ? err.message : String(err)}\n\n${RETRY_HINT}`,
+    )
     await labelNeedsAttention()
   } catch (commentErr) {
     console.error('failed to comment on issue', commentErr)
