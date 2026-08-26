@@ -92,7 +92,7 @@
   },
   {
     "id": "f_20260824_p2vklm",
-    "fact": "In Italy, 17 is unlucky because its Roman numeral XVII is an anagram of VIXI, Latin for \"I have lived\" \u2014 implying \"now I am dead.\" Many buildings skip a 17th floor, and Alitalia planes have no row 17.",
+    "fact": "In Italy, 17 is unlucky because its Roman numeral XVII is an anagram of VIXI, Latin for \"I have lived\" — implying \"now I am dead.\" Many buildings skip a 17th floor, and Alitalia planes have no row 17.",
     "tags": [
       "history",
       "language",
@@ -1542,5 +1542,18 @@
       "siteName": "Wikipedia"
     },
     "addedAt": "2026-08-25T23:45:00Z"
+  },
+  {
+    "id": "f_20260826_bu0y23",
+    "fact": "Brightest aerial image formed by multirotors/drones\nThe brightest aerial image formed by multirotors/drones is 222,448.61 lux, and was achieved by Amazon MGM Studios (USA) with the support of Heads in the Sky in Los Angeles, California, USA on 19 May 2026.",
+    "tags": [
+      "world record"
+    ],
+    "source": {
+      "url": "https://www.guinnessworldrecords.com/search?term=Aeral%20image&page=1&type=all&max=20&partial=_Results&",
+      "title": "Search | Guinness World Records",
+      "siteName": "Guinness World Records"
+    },
+    "addedAt": "2026-08-26T11:04:15.108Z"
   }
 ]
