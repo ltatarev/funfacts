@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { factSchema, factsFileSchema, TAGS } from '../src/lib/schema.ts'
+import { fetchSourceMeta } from './lib/source-meta.ts'
 
 const token = requireEnv('GITHUB_TOKEN')
 const repo = requireEnv('GITHUB_REPOSITORY')
@@ -114,34 +115,6 @@ function parseIssue(body: string): IssueFields {
   return { url, fact, tags }
 }
 
-// --- best-effort title / site-name lookup (cosmetic only; never blocks the submission) ---
-
-async function fetchSourceMeta(url: string): Promise<{ title?: string; siteName?: string }> {
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 15000)
-  try {
-    const res = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-      },
-    })
-    if (!res.ok) return {}
-    const html = await res.text()
-    const title = html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]?.trim()
-    const siteName = (
-      html.match(/<meta[^>]+property=["']og:site_name["'][^>]+content=["']([^"']*)["']/i) ??
-      html.match(/<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:site_name["']/i)
-    )?.[1]?.trim()
-    return { title: title || undefined, siteName: siteName || undefined }
-  } catch {
-    return {}
-  } finally {
-    clearTimeout(timeout)
-  }
-}
-
 // --- ids and url normalization ---
 
 function normalizeUrl(raw: string): string {
@@ -213,6 +186,7 @@ async function main(): Promise<void> {
       url: fields.url,
       title: meta.title ?? fields.url,
       siteName: meta.siteName,
+      excerpt: meta.excerpt,
     },
     addedAt: new Date().toISOString(),
   }

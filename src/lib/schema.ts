@@ -9,6 +9,8 @@ export const sourceSchema = z.object({
   url: z.url(),
   title: z.string().min(1),
   siteName: z.string().min(1).optional(),
+  /** One-sentence preview of the page, read once when the fact is added. */
+  excerpt: z.string().min(1).max(240).optional(),
 })
 
 export const factSchema = z.object({
