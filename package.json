@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "validate:facts": "tsx scripts/validate-facts.ts",
+    "backfill:previews": "tsx scripts/backfill-previews.ts",
     "build": "npm run validate:facts && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

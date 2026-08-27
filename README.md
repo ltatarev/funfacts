@@ -13,6 +13,19 @@ npm install
 npm run dev
 ```
 
+## Fill previews for older facts
+
+Facts added before the preview feature have no excerpt. Read the source pages
+once and write the excerpts back:
+
+```
+npm run backfill:previews
+```
+
+Add `--dry-run` to see the result without a write, `--force` to read every
+page again. Pages that block the fetch keep no excerpt. The card still shows
+the site, the title, and the link.
+
 ## Build
 
 ```
