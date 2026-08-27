@@ -17,7 +17,6 @@ const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(function ShareCard(
 
   return (
     <div
-      ref={ref}
       aria-hidden="true"
       style={{
         position: "fixed",
@@ -29,8 +28,11 @@ const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(function ShareCard(
       }}
     >
       <div
-        className="relative flex h-full w-full flex-col justify-between overflow-hidden px-20 py-20"
+        ref={ref}
+        className="relative flex flex-col justify-between overflow-hidden px-20 py-20"
         style={{
+          width: 1080,
+          height: 1080,
           background:
             "radial-gradient(circle at 10% 0%, #EEEAFB 0%, transparent 45%), radial-gradient(circle at 95% 15%, #E3EFF9 0%, transparent 45%), radial-gradient(circle at 15% 95%, #FBF3DC 0%, transparent 45%), var(--color-cream)",
         }}

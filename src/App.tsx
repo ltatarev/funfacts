@@ -171,10 +171,18 @@ export default function App() {
       const a = document.createElement("a");
       a.href = objectUrl;
       a.download = file.name;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(objectUrl);
-      await navigator.clipboard.writeText(link);
-      showToast("Image downloaded and link copied");
+      a.remove();
+      // Revoke later. Some browsers cancel the download if the URL goes first.
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 10000);
+
+      try {
+        await navigator.clipboard.writeText(link);
+        showToast("Image downloaded and link copied");
+      } catch {
+        showToast("Image downloaded");
+      }
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
       showToast("Could not share the image");
