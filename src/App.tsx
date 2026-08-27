@@ -24,6 +24,7 @@ import {
   ShareIcon,
 } from "./components/Icons";
 import { deepLinkFor, exportCardImage } from "./lib/share";
+import { isDialogOpen, isTypingTarget } from "./lib/keys";
 
 const facts = factsData as Fact[];
 const factsById = new Map(facts.map((f) => [f.id, f]));
@@ -62,13 +63,6 @@ function syncUrl(tags: string[], factId: string) {
 function withCurrentSeen(state: DeckState): DeckState {
   const id = state.order[state.index];
   return id ? markSeen(state, id) : state;
-}
-
-function isTypingTarget(target: EventTarget | null): boolean {
-  if (!(target instanceof HTMLElement)) return false;
-  if (target.isContentEditable) return true;
-  const tag = target.tagName;
-  return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
 }
 
 export default function App() {
@@ -190,7 +184,7 @@ export default function App() {
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (isTypingTarget(e.target)) return;
-      if (document.querySelector('[role="dialog"]')) return;
+      if (isDialogOpen()) return;
 
       switch (e.key) {
         case " ":
