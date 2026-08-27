@@ -1,15 +1,12 @@
 import type { Fact } from "../lib/schema";
 import { tagColor } from "../lib/palette";
+import SourcePreview from "./SourcePreview";
 
 interface FactCardProps {
   fact: Fact;
 }
 
 export default function FactCard({ fact }: FactCardProps) {
-  const sourceLabel = fact.source.siteName
-    ? `${fact.source.siteName} — ${fact.source.title}`
-    : fact.source.title;
-
   return (
     <div className="relative flex-1 px-6 py-8 sm:px-9 sm:py-9">
       <div className="flex flex-wrap gap-[7px]">
@@ -34,19 +31,7 @@ export default function FactCard({ fact }: FactCardProps) {
         {fact.fact}
       </p>
 
-      <div className="mt-6 flex items-center justify-between gap-4 border-t border-line pt-4">
-        <span className="font-body shrink-0 text-[11px] tracking-[0.14em] text-ink-faint uppercase">
-          Source
-        </span>
-        <a
-          href={fact.source.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-body truncate border-b border-ink-faint/50 pb-[2px] text-right text-[12.5px] text-ink-soft transition-colors hover:border-ink hover:text-ink"
-        >
-          {sourceLabel}
-        </a>
-      </div>
+      <SourcePreview source={fact.source} />
     </div>
   );
 }
